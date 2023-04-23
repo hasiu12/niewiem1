@@ -69,16 +69,15 @@ function checkAnswer() {
             resetAnswer();
             resultElement.textContent = '';
         }, 3000);
+    } else {
+        resultElement.textContent += ' To już koniec quizu!';
+        setTimeout(() => {
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('startQuiz').style.display = 'block';
+            currentQuestion = 0;
+            resultElement.textContent = '';
+        }, 3000);
     }
-} else {
-    resultElement.textContent += ' To już koniec quizu!';
-    setTimeout(() => {
-        document.getElementById('quizContent').style.display = 'none';
-        document.getElementById('startQuiz').style.display = 'block';
-        currentQuestion = 0;
-        resultElement.textContent = '';
-    }, 3000);
-}
 }
 
 function resetAnswer() {
