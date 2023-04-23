@@ -1,0 +1,24 @@
+[
+	{
+		"question": "Jakiego koloru jest niebo?",
+		"answers": [
+			"Niebieski",
+			"Zielony",
+			"Czerwony",
+			"¯ó³ty",
+			"Fioletowy"
+		],
+		"correctAnswer": 0
+	},
+	{
+		"question": "Stolica Polski to:",
+		"answers": [
+			"Kraków",
+			"Warszawa",
+			"Gdañsk",
+			"Poznañ",
+			"Wroc³aw"
+		],
+		"correctAnswer": 1
+	}
+]
