@@ -1,24 +1,20 @@
 let currentQuestion = 0;
-let quizData;
 let userAnswer;
+let quizData;
 
 async function fetchData() {
-  const response = await fetch('./quiz_data.json');
-  quizData = await response.json();
-  displayQuestion();
+    const response = await fetch('quiz_data.json');
+    quizData = await response.json();
 }
-
-
 
 function displayQuestion() {
     const questionElement = document.getElementById('question');
     const answersElement = document.getElementById('answers');
-    const question = quizData[currentQuestion];
 
-    questionElement.textContent = question.question;
+    questionElement.textContent = quizData[currentQuestion].question;
     answersElement.innerHTML = '';
 
-    question.answers.forEach((answer, index) => {
+    quizData[currentQuestion].answers.forEach((answer, index) => {
         const li = document.createElement('li');
         const input = document.createElement('input');
         const label = document.createElement('label');
@@ -28,7 +24,7 @@ function displayQuestion() {
         input.value = index;
         input.id = `answer-${index}`;
 
-        label.htmlFor = input.id;
+        label.htmlFor = `answer-${index}`;
         label.textContent = answer;
 
         li.appendChild(input);
@@ -36,6 +32,14 @@ function displayQuestion() {
         answersElement.appendChild(li);
     });
 }
+
+document.getElementById('startQuiz').addEventListener('click', () => {
+    document.getElementById('startQuiz').style.display = 'none';
+    document.getElementById('quizContent').style.display = 'block';
+    fetchData().then(() => {
+        displayQuestion();
+    });
+});
 
 document.getElementById('submit').addEventListener('click', () => {
     const checkedAnswer = document.querySelector('input[name="answer"]:checked');
@@ -46,12 +50,6 @@ document.getElementById('submit').addEventListener('click', () => {
     } else {
         alert('Wybierz odpowiedź przed sprawdzeniem!');
     }
-});
-
-document.getElementById('startQuiz').addEventListener('click', () => {
-    document.getElementById('startQuiz').style.display = 'none';
-    document.getElementById('quizContent').style.display = 'block';
-    fetchData();
 });
 
 function checkAnswer() {
@@ -69,12 +67,24 @@ function checkAnswer() {
     if (currentQuestion < quizData.length) {
         setTimeout(() => {
             displayQuestion();
+            resetAnswer();
             resultElement.textContent = '';
         }, 3000);
-    } else {
-        document.getElementById('submit').style.display = 'none';
-        resultElement.textContent += ' Koniec quizu!';
     }
+} else {
+    resultElement.textContent += ' To już koniec quizu!';
+    setTimeout(() => {
+        document.getElementById('quizContent').style.display = 'none';
+        document.getElementById('startQuiz').style.display = 'block';
+        currentQuestion = 0;
+        resultElement.textContent = '';
+    }, 3000);
+}
 }
 
-fetchData();
+function resetAnswer() {
+    const checkedAnswer = document.querySelector('input[name="answer"]:checked');
+    if (checkedAnswer) {
+        checkedAnswer.checked = false;
+    }
+}
