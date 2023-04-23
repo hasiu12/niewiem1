@@ -5,6 +5,7 @@ let quizData;
 async function fetchData() {
     const response = await fetch('quiz_data.json');
     quizData = await response.json();
+    displayQuestion();
 }
 
 function displayQuestion() {
@@ -33,12 +34,10 @@ function displayQuestion() {
     });
 }
 
-document.getElementById('startQuiz').addEventListener('click', () => {
+document.getElementById('startQuiz').addEventListener('click', async () => {
     document.getElementById('startQuiz').style.display = 'none';
     document.getElementById('quizContent').style.display = 'block';
-    fetchData().then(() => {
-        displayQuestion();
-    });
+    await fetchData();
 });
 
 document.getElementById('submit').addEventListener('click', () => {
