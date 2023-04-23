@@ -61,24 +61,24 @@ function checkAnswer() {
         resultElement.textContent = `Zła odpowiedź! Poprawna odpowiedź to: ${quizData[currentQuestion].answers[correctAnswer]}`;
     }
 
-    currentQuestion++;
-
-    if (currentQuestion < quizData.length) {
-        setTimeout(() => {
+    setTimeout(() => {
+        currentQuestion++;
+        if (currentQuestion < quizData.length) {
             displayQuestion();
             resetAnswer();
             resultElement.textContent = '';
-        }, 3000);
-    } else {
-        resultElement.textContent += ' To już koniec quizu!';
-        setTimeout(() => {
-            document.getElementById('quizContent').style.display = 'none';
-            document.getElementById('startQuiz').style.display = 'block';
-            currentQuestion = 0;
-            resultElement.textContent = '';
-        }, 3000);
-    }
+        } else {
+            resultElement.textContent += ' To już koniec quizu!';
+            setTimeout(() => {
+                document.getElementById('quizContent').style.display = 'none';
+                document.getElementById('startQuiz').style.display = 'block';
+                currentQuestion = 0;
+                resultElement.textContent = '';
+            }, 3000);
+        }
+    }, 3000);
 }
+
 
 function resetAnswer() {
     const checkedAnswer = document.querySelector('input[name="answer"]:checked');
