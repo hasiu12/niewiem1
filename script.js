@@ -8,6 +8,8 @@ async function fetchData() {
   displayQuestion();
 }
 
+
+
 function displayQuestion() {
     const questionElement = document.getElementById('question');
     const answersElement = document.getElementById('answers');
@@ -42,8 +44,14 @@ document.getElementById('submit').addEventListener('click', () => {
         userAnswer = parseInt(checkedAnswer.value);
         checkAnswer();
     } else {
-        alert('Wybierz odpowiedŸ przed sprawdzeniem!');
+        alert('Wybierz odpowiedź przed sprawdzeniem!');
     }
+});
+
+document.getElementById('startQuiz').addEventListener('click', () => {
+    document.getElementById('startQuiz').style.display = 'none';
+    document.getElementById('quizContent').style.display = 'block';
+    fetchData();
 });
 
 function checkAnswer() {
@@ -51,9 +59,9 @@ function checkAnswer() {
     const correctAnswer = quizData[currentQuestion].correctAnswer;
 
     if (userAnswer === correctAnswer) {
-        resultElement.textContent = 'Poprawna odpowiedŸ!';
+        resultElement.textContent = 'Poprawna odpowiedź!';
     } else {
-        resultElement.textContent = `Z³a odpowiedŸ! Poprawna odpowiedŸ to: ${quizData[currentQuestion].answers[correctAnswer]}`;
+        resultElement.textContent = `Zła odpowiedź! Poprawna odpowiedź to: ${quizData[currentQuestion].answers[correctAnswer]}`;
     }
 
     currentQuestion++;
