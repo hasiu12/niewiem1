@@ -3,9 +3,9 @@ let quizData;
 let userAnswer;
 
 async function fetchData() {
-    const response = await fetch('quiz_data.json');
-    quizData = await response.json();
-    displayQuestion();
+  const response = await fetch('./quiz_data.json');
+  quizData = await response.json();
+  displayQuestion();
 }
 
 function displayQuestion() {
@@ -42,7 +42,7 @@ document.getElementById('submit').addEventListener('click', () => {
         userAnswer = parseInt(checkedAnswer.value);
         checkAnswer();
     } else {
-        alert('Wybierz odpowiedü przed sprawdzeniem!');
+        alert('Wybierz odpowied≈∏ przed sprawdzeniem!');
     }
 });
 
@@ -51,9 +51,9 @@ function checkAnswer() {
     const correctAnswer = quizData[currentQuestion].correctAnswer;
 
     if (userAnswer === correctAnswer) {
-        resultElement.textContent = 'Poprawna odpowiedü!';
+        resultElement.textContent = 'Poprawna odpowied≈∏!';
     } else {
-        resultElement.textContent = `Z≥a odpowiedü! Poprawna odpowiedü to: ${quizData[currentQuestion].answers[correctAnswer]}`;
+        resultElement.textContent = `Z¬≥a odpowied≈∏! Poprawna odpowied≈∏ to: ${quizData[currentQuestion].answers[correctAnswer]}`;
     }
 
     currentQuestion++;
